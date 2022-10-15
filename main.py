@@ -1,6 +1,35 @@
 import argparse
 import utils
 
+def convert_ms_to_time(ms):
+    mins = str(ms // 60000).zfill(2)
+    secs = str(round((ms % 60000) / 1000, 2)).zfill(4)
+    time = f'{mins}:{secs}'
+    return time
+
+
+def process_content_safety_labels(content_safety_labels, bad_labels=['crime_violence', 'hate_speech']):
+    aggregate = { label: [] for label in bad_labels }
+
+    results = content_safety_labels['results']
+    for result in results:
+        labels = result['labels']
+        text = result['text']
+        timestamp = result['timestamp']
+        start, end = timestamp['start'], timestamp['end']
+        start, end = convert_ms_to_time(start), convert_ms_to_time(end)
+
+        for label in labels:
+            if label['label'] in bad_labels:
+                print(f'From {start} to {end}')
+                print(label)
+                print(text)
+                print()
+
+                aggregate[label['label']].append([label['confidence'], label['severity']])
+
+    return aggregate
+
 
 def main():
     f = open('.api-key', 'r')
@@ -49,6 +78,7 @@ def main():
 
     print('Content Safety Labels:')
     print(content_safety_labels)
+    print(process_content_safety_labels(content_safety_labels))
 
     # # Request the paragraphs of the transcript
     # paragraphs = utils.get_paragraphs(polling_endpoint, HEADER)
