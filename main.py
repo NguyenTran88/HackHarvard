@@ -1,5 +1,6 @@
 import argparse
 from bcolors import bcolors
+from matplotlib import pyplot as plt
 import utils
 
 USE_COLORS = True
@@ -46,7 +47,23 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
     total_time = 0
     negative_time = 0
     weighted_negative_time = 0
+    times = [0]
+    sentiments = [0]
     for sentence in sentiment_analysis_results:
+        start, end = sentence['start'], sentence['end']
+        times.append(start)
+        times.append(end)
+        if sentence['sentiment'] == 'POSITIVE':
+            sentiments.append(sentiments[-1])
+            sentiments.append(sentiments[-1] + sentence['confidence'])
+        elif sentence['sentiment'] == 'NEGATIVE':
+            sentiments.append(sentiments[-1])
+            sentiments.append(sentiments[-1] - sentence['confidence'])
+        else:
+            sentiments.append(sentiments[-1])
+            sentiments.append(sentiments[-1])
+
+        # sentiments.append(sentence['sentiment'])
         total_time += sentence['end'] - sentence['start']
         if sentence['sentiment'] == 'NEGATIVE':
             negative_time += sentence['end'] - sentence['start']
@@ -56,7 +73,7 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
             print(sentence['text'])
             print()
 
-    return (total_time, negative_time, weighted_negative_time)
+    return (total_time, negative_time, weighted_negative_time, times, sentiments)
 
 def main():
     f = open('.api-key', 'r')
@@ -110,11 +127,16 @@ def main():
     # print()
     print(process_content_safety_labels(content_safety_labels))
 
-    total_time, negative_time, weighted_negative_time = process_sentiment_analysis_results(sentiment_analysis_results)
+    total_time, negative_time, weighted_negative_time, times, sentiments = process_sentiment_analysis_results(sentiment_analysis_results)
     total_time = int(total_time)
     negative_time = int(negative_time)
     weighted_negative_time = int(weighted_negative_time)
     print(f'Negative / Total time of speech: {utils.convert_ms_to_time(negative_time)}/{utils.convert_ms_to_time(total_time)} ({100*round(negative_time / total_time, 4)}%)')
+
+    plt.plot(times, sentiments, '-')
+    plt.savefig('result.png')
+    # print(times)
+    # print(sentiments)
 
     # # Request the paragraphs of the transcript
     # paragraphs = utils.get_paragraphs(polling_endpoint, HEADER)
