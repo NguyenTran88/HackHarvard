@@ -8,8 +8,9 @@ TRANSCRIPT_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
 
 def convert_ms_to_time(ms):
     mins = str(ms // 60000).zfill(2)
-    secs = str(round((ms % 60000) / 1000, 2)).zfill(4)
-    time = f'{mins}:{secs}'
+    secs = str((ms % 60000) // 1000).zfill(2)
+    frac = str((ms % 1000) // 10).zfill(2)
+    time = f'{mins}:{secs}.{frac}'
     return time
 
 
