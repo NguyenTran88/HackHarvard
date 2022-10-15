@@ -16,7 +16,7 @@ Make an account on AssemblyAI.
 Make a new file called `.api-key`, and paste your API key into that file.
 
 There are 2 ways to run the file:
-1. Provide an audio file
+1. Provide an audio file. Place the audio file in the same folder as the main.py script, or upload the audio file to an external service (e.g. Google Drive or DropBox) and provide a direct download link.
 ```bash
 $ python main.py audio_file [--local]
 ```
