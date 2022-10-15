@@ -1,14 +1,11 @@
 import argparse
+from bcolors import bcolors
 import utils
 
-def convert_ms_to_time(ms):
-    mins = str(ms // 60000).zfill(2)
-    secs = str(round((ms % 60000) / 1000, 2)).zfill(4)
-    time = f'{mins}:{secs}'
-    return time
+USE_COLORS = True
 
 
-def process_content_safety_labels(content_safety_labels, bad_labels=['crime_violence', 'hate_speech']):
+def process_content_safety_labels(content_safety_labels, bad_labels=['crime_violence', 'hate_speech'], f = lambda a, b: a*b, cutoff=0.36):
     aggregate = { label: [] for label in bad_labels }
 
     results = content_safety_labels['results']
@@ -17,16 +14,30 @@ def process_content_safety_labels(content_safety_labels, bad_labels=['crime_viol
         text = result['text']
         timestamp = result['timestamp']
         start, end = timestamp['start'], timestamp['end']
-        start, end = convert_ms_to_time(start), convert_ms_to_time(end)
+        start, end = utils.convert_ms_to_time(start), utils.convert_ms_to_time(end)
 
         for label in labels:
             if label['label'] in bad_labels:
-                print(f'From {start} to {end}')
-                print(label)
-                print(text)
-                print()
+                confidence = float(label['confidence'])
+                severity = float(label['severity'])
 
-                aggregate[label['label']].append([label['confidence'], label['severity']])
+                if USE_COLORS:
+                    print(f'Label {bcolors.OKBLUE}{label["label"]}{bcolors.ENDC} found from {bcolors.HEADER}{start}{bcolors.ENDC} to {bcolors.HEADER}{end}{bcolors.ENDC}')
+                    print(f'with confidence {bcolors.OKCYAN}{confidence}{bcolors.ENDC} and severity {bcolors.OKCYAN}{severity}{bcolors.ENDC}')
+                else:
+                    print(f'From {start} to {end}')
+                    print(f'with confidence {confidence} and severity {severity}')
+
+                print(text)
+
+                if f(confidence, severity) > cutoff:
+                    if USE_COLORS:
+                        print(f'{bcolors.WARNING}FLAGGED AS DANGEROUS{bcolors.ENDC}')
+                    else:
+                        print(f'FLAGGED AS DANGEROUS')
+
+                aggregate[label['label']].append((confidence, severity))
+                print()
 
     return aggregate
 
@@ -62,7 +73,7 @@ def main():
 
         json = {
             'audio_url': upload_url['upload_url'],
-            "content_safety": True
+            "content_safety": True,
         }
 
         # Request a transcription
@@ -78,6 +89,7 @@ def main():
 
     print('Content Safety Labels:')
     print(content_safety_labels)
+    print()
     print(process_content_safety_labels(content_safety_labels))
 
     # # Request the paragraphs of the transcript

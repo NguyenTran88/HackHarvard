@@ -6,6 +6,13 @@ UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
 TRANSCRIPT_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
 
 
+def convert_ms_to_time(ms):
+    mins = str(ms // 60000).zfill(2)
+    secs = str(round((ms % 60000) / 1000, 2)).zfill(4)
+    time = f'{mins}:{secs}'
+    return time
+
+
 # Helper for `upload_file()`
 def _read_file(filename, chunk_size=5242880):
     with open(filename, "rb") as f:
