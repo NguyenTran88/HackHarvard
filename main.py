@@ -22,7 +22,7 @@ def process_content_safety_labels(content_safety_labels, bad_labels=['crime_viol
                 severity = float(label['severity'])
 
                 if USE_COLORS:
-                    print(f'Label {bcolors.OKBLUE}{label["label"]}{bcolors.ENDC} found from {bcolors.HEADER}{start}{bcolors.ENDC} to {bcolors.HEADER}{end}{bcolors.ENDC}')
+                    print(f'Label {bcolors.OKGREEN}{label["label"]}{bcolors.ENDC} found from {bcolors.HEADER}{start}{bcolors.ENDC} to {bcolors.HEADER}{end}{bcolors.ENDC}')
                     print(f'with confidence {bcolors.OKCYAN}{confidence}{bcolors.ENDC} and severity {bcolors.OKCYAN}{severity}{bcolors.ENDC}')
                 else:
                     print(f'From {start} to {end}')
@@ -41,6 +41,22 @@ def process_content_safety_labels(content_safety_labels, bad_labels=['crime_viol
 
     return aggregate
 
+
+def process_sentiment_analysis_results(sentiment_analysis_results):
+    total_time = 0
+    negative_time = 0
+    weighted_negative_time = 0
+    for sentence in sentiment_analysis_results:
+        total_time += sentence['end'] - sentence['start']
+        if sentence['sentiment'] == 'NEGATIVE':
+            negative_time += sentence['end'] - sentence['start']
+            weighted_negative_time += sentence['confidence'] * (sentence['end'] - sentence['start'])
+            print(f'{bcolors.OKGREEN}NEGATIVE{bcolors.ENDC} speech found from {bcolors.HEADER}{utils.convert_ms_to_time(sentence["start"])}{bcolors.ENDC} to {bcolors.HEADER}{utils.convert_ms_to_time(sentence["end"])}{bcolors.ENDC}')
+            print('Confidence:', sentence['confidence'])
+            print(sentence['text'])
+            print()
+
+    return (total_time, negative_time, weighted_negative_time)
 
 def main():
     f = open('.api-key', 'r')
@@ -74,6 +90,7 @@ def main():
         json = {
             'audio_url': upload_url['upload_url'],
             "content_safety": True,
+            "sentiment_analysis": True,
         }
 
         # Request a transcription
@@ -86,11 +103,18 @@ def main():
     polling_response = utils.wait_for_completion(polling_endpoint, HEADER)
 
     content_safety_labels = polling_response['content_safety_labels']
+    sentiment_analysis_results = polling_response['sentiment_analysis_results']
 
-    print('Content Safety Labels:')
-    print(content_safety_labels)
-    print()
+    # print('Content Safety Labels:')
+    # print(content_safety_labels)
+    # print()
     print(process_content_safety_labels(content_safety_labels))
+
+    total_time, negative_time, weighted_negative_time = process_sentiment_analysis_results(sentiment_analysis_results)
+    total_time = int(total_time)
+    negative_time = int(negative_time)
+    weighted_negative_time = int(weighted_negative_time)
+    print(f'Negative / Total time of speech: {utils.convert_ms_to_time(negative_time)}/{utils.convert_ms_to_time(total_time)} ({100*round(negative_time / total_time, 4)}%)')
 
     # # Request the paragraphs of the transcript
     # paragraphs = utils.get_paragraphs(polling_endpoint, HEADER)
