@@ -12,29 +12,35 @@ def main():
     }
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('audio_file', help='url to file or local audio filename')
+    parser.add_argument('audio_file', nargs='?', help='url to file or local audio filename')
     parser.add_argument('--local', action='store_true', help='must be set if audio_file is a local filename')
+    parser.add_argument('--id', action='store', help='provide previous transcript id (not text)')
 
     args = parser.parse_args()
 
-    # Create header with authorization along with content-type
+    if not (args.id or args.local or args.audio_file):
+        print('Please provide at least 1 argument - check README for usage instructions.')
+        return
 
-    if args.local:
-        # Upload the audio file to AssemblyAI
-        upload_url = utils.upload_file(args.audio_file, HEADER)
+    if args.id:
+        polling_endpoint = utils.make_polling_endpoint({'id': args.id})
     else:
-        upload_url = {'upload_url': args.audio_file}
+        if args.local:
+            # Upload the audio file to AssemblyAI
+            upload_url = utils.upload_file(args.audio_file, HEADER)
+        else:
+            upload_url = {'upload_url': args.audio_file}
 
-    json = {
-        'audio_url': upload_url['upload_url'],
-        "content_safety": True
-    }
+        json = {
+            'audio_url': upload_url['upload_url'],
+            "content_safety": True
+        }
 
-    # Request a transcription
-    json_response = utils.json_request(json, HEADER)
+        # Request a transcription
+        json_response = utils.json_request(json, HEADER)
 
-    # Create a polling endpoint that will let us check when the transcription is complete
-    polling_endpoint = utils.make_polling_endpoint(json_response)
+        # Create a polling endpoint that will let us check when the transcription is complete
+        polling_endpoint = utils.make_polling_endpoint(json_response)
 
     # Wait until the transcription is complete
     polling_response = utils.wait_for_completion(polling_endpoint, HEADER)
