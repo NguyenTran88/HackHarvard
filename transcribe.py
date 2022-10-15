@@ -39,7 +39,10 @@ def main():
     # Wait until the transcription is complete
     polling_response = utils.wait_for_completion(polling_endpoint, HEADER)
 
-    print(polling_response['content_safety_labels'])
+    content_safety_labels = polling_response['content_safety_labels']
+
+    print('Content Safety Labels:')
+    print(content_safety_labels)
 
     # # Request the paragraphs of the transcript
     # paragraphs = utils.get_paragraphs(polling_endpoint, HEADER)
