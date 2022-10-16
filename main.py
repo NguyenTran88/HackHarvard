@@ -1,6 +1,7 @@
 import argparse
 from bcolors import bcolors
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
+import os
 import utils
 
 USE_COLORS = True
@@ -23,8 +24,8 @@ def process_content_safety_labels(content_safety_labels, bad_labels=['crime_viol
                 severity = float(label['severity'])
 
                 if USE_COLORS:
-                    print(f'Label {bcolors.OKGREEN}{label["label"]}{bcolors.ENDC} found from {bcolors.HEADER}{start}{bcolors.ENDC} to {bcolors.HEADER}{end}{bcolors.ENDC}')
-                    print(f'with confidence {bcolors.OKCYAN}{confidence}{bcolors.ENDC} and severity {bcolors.OKCYAN}{severity}{bcolors.ENDC}')
+                    print(f'Label {bcolors.OKBLUE}{label["label"]}{bcolors.ENDC} found from {bcolors.HEADER}{start}{bcolors.ENDC} to {bcolors.HEADER}{end}{bcolors.ENDC}')
+                    print(f'with confidence {bcolors.OKGREEN}{confidence}{bcolors.ENDC} and severity {bcolors.OKGREEN}{severity}{bcolors.ENDC}')
                 else:
                     print(f'From {start} to {end}')
                     print(f'with confidence {confidence} and severity {severity}')
@@ -33,7 +34,7 @@ def process_content_safety_labels(content_safety_labels, bad_labels=['crime_viol
 
                 if f(confidence, severity) > cutoff:
                     if USE_COLORS:
-                        print(f'{bcolors.WARNING}FLAGGED AS DANGEROUS{bcolors.ENDC}')
+                        print(f'{bcolors.FAIL}FLAGGED AS DANGEROUS{bcolors.ENDC}')
                     else:
                         print(f'FLAGGED AS DANGEROUS')
 
@@ -68,8 +69,8 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
         if sentence['sentiment'] == 'NEGATIVE':
             negative_time += sentence['end'] - sentence['start']
             weighted_negative_time += sentence['confidence'] * (sentence['end'] - sentence['start'])
-            print(f'{bcolors.OKGREEN}NEGATIVE{bcolors.ENDC} speech found from {bcolors.HEADER}{utils.convert_ms_to_time(sentence["start"])}{bcolors.ENDC} to {bcolors.HEADER}{utils.convert_ms_to_time(sentence["end"])}{bcolors.ENDC}')
-            print('Confidence:', sentence['confidence'])
+            print(f'{bcolors.OKBLUE}NEGATIVE{bcolors.ENDC} speech found from {bcolors.HEADER}{utils.convert_ms_to_time(sentence["start"])}{bcolors.ENDC} to {bcolors.HEADER}{utils.convert_ms_to_time(sentence["end"])}{bcolors.ENDC}')
+            print(f'with confidence: {bcolors.OKGREEN}{sentence["confidence"]}{bcolors.ENDC}')
             print(sentence['text'])
             print()
 
@@ -78,6 +79,7 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
 def main():
     f = open('.api-key', 'r')
     API_KEY = f.readline().strip()
+    print(API_KEY)
 
     HEADER = {
         'authorization': API_KEY,
@@ -112,6 +114,7 @@ def main():
 
         # Request a transcription
         json_response = utils.json_request(json, HEADER)
+        print('ID:', json_response['id'])
 
         # Create a polling endpoint that will let us check when the transcription is complete
         polling_endpoint = utils.make_polling_endpoint(json_response)
@@ -122,19 +125,19 @@ def main():
     content_safety_labels = polling_response['content_safety_labels']
     sentiment_analysis_results = polling_response['sentiment_analysis_results']
 
-    # print('Content Safety Labels:')
-    # print(content_safety_labels)
-    # print()
-    print(process_content_safety_labels(content_safety_labels))
+    print('<b>Content Safety Summary:</b>')
+    process_content_safety_labels(content_safety_labels)
+    print()
 
+    print('<b>Sentiment Analysis Summary:</b>')
     total_time, negative_time, weighted_negative_time, times, sentiments = process_sentiment_analysis_results(sentiment_analysis_results)
     total_time = int(total_time)
     negative_time = int(negative_time)
     weighted_negative_time = int(weighted_negative_time)
-    print(f'Negative / Total time of speech: {utils.convert_ms_to_time(negative_time)}/{utils.convert_ms_to_time(total_time)} ({100*round(negative_time / total_time, 4)}%)')
-
-    plt.plot(times, sentiments, '-')
-    plt.savefig('result.png')
+    print(f'Negative / Total time of speech: {utils.convert_ms_to_time(negative_time)}/{utils.convert_ms_to_time(total_time)} ({100*round(negative_time / (0.01 + total_time), 4)}%)')
+    print('Done.')
+    # plt.plot(times, sentiments, '-')
+    # plt.savefig('result.png')
     # print(times)
     # print(sentiments)
 

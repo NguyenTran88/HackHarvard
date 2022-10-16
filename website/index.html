@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlurSensor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">SlurSensor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <p class="mt-3">
+            Click the buttom below to select an <code>.mp3</code> audio file from your computer.
+            The file will be uploaded to our servers, which will then use the
+            <a href="https://www.assemblyai.com" target="_blank">AssemblyAI</a>
+            to perform content moderation and sentiment analysis on the audio file to determine which sections of the
+            audio, if any, are potentially harmful.
+        </p>
+        <p>Created for <a href="https://hackharvard2022.devpost.com" target="_blank">2022 HackHarvard</a>.</p>
+        <button class="btn btn-primary mx-auto d-block" id="upload-audio">Upload Audio</button>
+        <input type="file" id="input" class="d-none">
+        <p>Or, choose a past upload: <code id="audio-id"></code></p>
+        <select class="form-select" id="audio-id-select" aria-label="Default select example">
+            <option value="default" selected>Choose a past ID</option>
+            <option value="rk5eitwtv4-29b6-4659-a9fb-ebfa923a6c92">rk5eitwtv4-29b6-4659-a9fb-ebfa923a6c92</option>
+            <option value="rk5eieed0t-e8d8-43c0-ad74-5e7174e82919">rk5eieed0t-e8d8-43c0-ad74-5e7174e82919</option>
+            <option value="rk5e7vi90o-3339-4060-91ee-2412272b508b">rk5e7vi90o-3339-4060-91ee-2412272b508b</option>
+            <option value="rk5eg7fia3-5f54-44bf-a837-68fc07cd1b04">rk5eg7fia3-5f54-44bf-a837-68fc07cd1b04</option>
+            <option value="rkw9n628uk-031f-4342-bc11-e915131ace04">rkw9n628uk-031f-4342-bc11-e915131ace04</option>
+            <option value="rkw9m1p1vx-2320-4edf-9579-679b033b1d71">rkw9m1p1vx-2320-4edf-9579-679b033b1d71</option>
+            <option value="rkw9pu0yx8-1b0c-4bfe-bc06-c78cd1b5725f">rkw9pu0yx8-1b0c-4bfe-bc06-c78cd1b5725f</option>
+            <option value="rkw9djf2se-28ec-476b-9150-72c0051f2165">rkw9djf2se-28ec-476b-9150-72c0051f2165</option>
+            <option value="rkw9c235du-1fca-4702-8571-fc18e28acecc">rkw9c235du-1fca-4702-8571-fc18e28acecc</option>
+            <option value="rkw9cs5rzn-af77-4a1a-85c6-7cd82afb451d">rkw9cs5rzn-af77-4a1a-85c6-7cd82afb451d</option>
+            <option value="rkw9hghkr9-5b00-4000-aa6c-886386ec87ef">rkw9hghkr9-5b00-4000-aa6c-886386ec87ef</option>
+            <option value="rkw9j4aboz-baff-4c0b-bcfc-d540e15a838a">rkw9j4aboz-baff-4c0b-bcfc-d540e15a838a</option>
+            <option value="rkw988hw1e-ef33-4ad1-bde3-3e99494d7183">rkw988hw1e-ef33-4ad1-bde3-3e99494d7183</option>
+        </select>
+        <hr>
+        <div id="response-overall"></div>
+    </div>
+
+    <script src="/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
