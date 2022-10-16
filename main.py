@@ -122,11 +122,11 @@ def main():
     content_safety_labels = polling_response['content_safety_labels']
     sentiment_analysis_results = polling_response['sentiment_analysis_results']
 
-    # print('Content Safety Labels:')
-    # print(content_safety_labels)
-    # print()
-    print(process_content_safety_labels(content_safety_labels))
+    print('<h4>Content Safety Summary:</h4>')
+    process_content_safety_labels(content_safety_labels)
+    print()
 
+    print('<h4>Sentiment Analysis Summary:</h4>')
     total_time, negative_time, weighted_negative_time, times, sentiments = process_sentiment_analysis_results(sentiment_analysis_results)
     total_time = int(total_time)
     negative_time = int(negative_time)

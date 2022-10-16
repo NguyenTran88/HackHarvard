@@ -1,0 +1,51 @@
+document.getElementById('upload-audio').addEventListener('click', function (event) {
+    document.getElementById('input').click();
+});
+
+document.getElementById('input').addEventListener('change', function (event) {
+    if (this.files.length !== 1) {
+        alert('Please select only one file');
+        return;
+    }
+
+    var file = this.files[0];
+
+    // check if file <= 20 MB
+    if (file.size > 20971520) {
+        alert('File size must be less than 20 MB');
+        return;
+    }
+
+    console.log(file.type)
+    // check if file is audio
+    if (!file.type.match('audio.mpeg')) {
+        alert('Please select a .mp3 audio file');
+        return;
+    }
+
+    document.getElementById('response').innerHTML = 'Processing... (this usually takes ~30 seconds)';
+    var reader = new FileReader();
+    reader.onload = function () {
+        fetch('/api/upload-audio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                audio: reader.result
+            })
+        }).then(response => response.json())
+        .then(function (response) {
+            document.getElementById('response').innerHTML = response.text
+            .replace(/\n/g, '<br>')
+            .replace(/\033\[92m/g, '<span style="color: green;">')
+            .replace(/\033\[93m/g, '<span style="color: yellow;">')
+            .replace(/\033\[94m/g, '<span style="color: blue;">')
+            .replace(/\033\[95m/g, '<span style="color: purple;">')
+            .replace(/\033\[96m/g, '<span style="color: cyan;">')
+            .replace(/\033\[0m/g, '</span>');
+        });
+    }
+
+    reader.readAsDataURL(file);
+});
