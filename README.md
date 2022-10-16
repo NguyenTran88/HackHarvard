@@ -32,12 +32,6 @@ $ python main.py --id id
 
 Canva presentation link: https://www.canva.com/design/DAFPIp9e9A0/zdNoQjsjf4Ri3D8jQLCZZw/view?utm_content=DAFPIp9e9A0&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
 
-## Team Members
-Salvador Chavez - B.Sc. in Engineering Physics, Tecnológico de Monterrey
-Nguyen Tran - B.A in Computer Science, Columbia University
-Jesús Guzman - B.Sc. in Engineering Physics, Tecnológico de Monterrey 
-Geoffrey Wu - B.Sc. in Computer Science, Columbia University
-
 # Our Project: SlurSensor
 
 Assembly AI's SlurSensor is a detection system for harmful speeches in online video games. Using AssemblyAI’s Audio Intelligence APIs, we can distinguish players who display verbally abusive behaviors in the video game community. Data extracted is plotted to have track of the possible abusive language along the video or streaming. Thus, large video game companies and streaming platforms can use this data-monitoring to identify the most toxic users to create a safer environment for their community. We are willing to take part in the new generation of voice-controlled games and streaming. 
@@ -92,3 +86,10 @@ Conflict of interest.
 
 Using machine learning to increase the accuracy of the program to fulfill the goal of correctly identifying if a player is truly bothering or joking with others. 
 Provide a more effective visual and detailed analysis of each detected toxic user to ease the data outcome interpretation. We are looking only for toxic users to make a healthier environment. 
+
+## Team Members
+Salvador Chavez - B.Sc. in Engineering Physics, Tecnológico de Monterrey
+Nguyen Tran - B.A in Computer Science, Columbia University
+Jesús Guzman - B.Sc. in Engineering Physics, Tecnológico de Monterrey 
+Geoffrey Wu - B.Sc. in Computer Science, Columbia University
+
