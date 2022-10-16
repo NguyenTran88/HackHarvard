@@ -45,7 +45,7 @@ Video game companies detect toxic players via in-game reporting which most of th
 
 With AssemblyAI Audio Intelligence Content Monitoring and Sentiment Analysis APIs, video game companies could monitor users and finally implement a secure system by training the AI based on every user’s audio files;  thus, detecting if any sensitive content is spoken in those files and pinpointing exactly when and what was spoken so that after a short period, Our final aim is to make train the system so that it can successfully identify when someone is just joking around and when it is being an intentional threat, insult, and so on. For each audio we generate a graph to better comprehend the harmful behavior of each user. Therefore, these video game platforms could finally create a safe and regulated environment for all players and try to eliminate negative and toxic users once and for all. 
 
-#Tech implementation / Tools 
+# Tech implementation / Tools 
 
 1. AssemblyAI Audio Intelligence:
         - Content Moderation API
