@@ -1,6 +1,7 @@
 import argparse
 from bcolors import bcolors
 from matplotlib import pyplot as plt
+import os
 import utils
 
 USE_COLORS = True
@@ -76,8 +77,11 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
     return (total_time, negative_time, weighted_negative_time, times, sentiments)
 
 def main():
-    f = open('.api-key', 'r')
-    API_KEY = f.readline().strip()
+    if os.environ.get('IS_HEROKU', None):
+        API_KEY = os.environ.get('API_KEY')
+    else:
+        f = open('.api-key', 'r')
+        API_KEY = f.readline().strip()
 
     HEADER = {
         'authorization': API_KEY,
