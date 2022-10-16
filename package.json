@@ -1,4 +1,5 @@
 {
+  "name": "slur-sensor",
   "scripts": {
     "start": "node website/server.js"
   },
