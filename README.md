@@ -4,6 +4,8 @@
 Uses [AssemblyAI](https://www.assemblyai.com) to detect negative speech in games.
 Code based on [this repository](https://github.com/AssemblyAI-Examples/assemblyai-and-python-in-5-minutes).
 
+The website is available [here](http://143.244.145.99).
+
 ## Requirements
 
 ```bash
