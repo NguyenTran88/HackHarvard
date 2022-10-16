@@ -8,6 +8,7 @@ Code based on [this repository](https://github.com/AssemblyAI-Examples/assemblya
 
 ```bash
 $ pip install requests
+$ pip install matplotlib
 ```
 
 ## Usage
