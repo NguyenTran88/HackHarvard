@@ -88,8 +88,8 @@ Using machine learning to increase the accuracy of the program to fulfill the go
 Provide a more effective visual and detailed analysis of each detected toxic user to ease the data outcome interpretation. We are looking only for toxic users to make a healthier environment. 
 
 ## Team Members
-Salvador Chavez - B.Sc. in Engineering Physics, Tecnológico de Monterrey
-Nguyen Tran - B.A in Computer Science, Columbia University
-Jesús Guzman - B.Sc. in Engineering Physics, Tecnológico de Monterrey 
-Geoffrey Wu - B.Sc. in Computer Science, Columbia University
+- Salvador Chavez - B.Sc. in Engineering Physics, Tecnológico de Monterrey
+- Nguyen Tran - B.A in Computer Science, Columbia University
+- Jesús Guzman - B.Sc. in Engineering Physics, Tecnológico de Monterrey 
+- Geoffrey Wu - B.Sc. in Computer Science, Columbia University
 
