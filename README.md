@@ -33,7 +33,7 @@ $ python main.py --id id
 
 Assembly AI *Name* is a detection system for harmful speeches in online video games. Using AssemblyAI’s Audio Intelligence APIs, we can distinguish players who display verbally abusive behaviors in the video game community. Data extracted is plotted to have track of the possible abusive language along the video or streaming. Thus, large video game companies and streaming platforms can use this data-monitoring to identify the most toxic users to create a safer environment for their community. We are willing to take part in the new generation of voice-controlled games and streaming. 
 
-## Problematic
+## Problematics
 
 Gaming is a competitive environment where the majority of members in the gaming community resorts to bullying. What’s more, even with today’s security technology, the online gaming industry still suffers from endless negative users practicing violence, cyberbullying, hate speech, harassment, death threats, and direct attacks against different groups of people including minors. Bullying victims generally face verbal harassment in multiplayer lobbies and in-game chats. According to ResearchGate & ScienceDaily, cyberbullying victims are 1.9 times more likely to commit suicide. 
  
