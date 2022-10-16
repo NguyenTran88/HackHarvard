@@ -1,4 +1,4 @@
-# HavardHack AssemblyAI Challenge
+# HavardHack AssemblyAI Challenge - SlurSensor
 2022 Harvard Hackathon Project Columbia University / Tecnológico de Monterrey
 
 Uses [AssemblyAI](https://www.assemblyai.com) to detect negative speech in games.
