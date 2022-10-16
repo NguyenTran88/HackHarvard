@@ -77,7 +77,7 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
 
 def main():
     f = open('.api-key', 'r')
-    API_KEY = f.readline()[:-1]
+    API_KEY = f.readline().strip()
 
     HEADER = {
         'authorization': API_KEY,
