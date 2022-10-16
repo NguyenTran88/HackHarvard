@@ -59,6 +59,8 @@ document.getElementById('input').addEventListener('change', function (event) {
 });
 
 document.getElementById('audio-id-select').addEventListener('change', function (event) {
+    if (this.value === 'default') return;
+
     document.getElementById('response-overall').innerHTML = `
     <h4>Response:</h4>
     <div id="response">Processing... (this may take a few minutes)</div>`;
