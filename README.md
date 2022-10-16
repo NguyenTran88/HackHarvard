@@ -29,6 +29,9 @@ $ python main.py audio_file [--local]
 $ python main.py --id id
 ```
 - id: the id of the processed audio file (e.g. `oris9w0oou-f581-4c2e-9e4e-383f91f7f14d`)
+
+Canva presentation link: https://www.canva.com/design/DAFPIp9e9A0/zdNoQjsjf4Ri3D8jQLCZZw/view?utm_content=DAFPIp9e9A0&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink
+
 # Our Project
 
 Assembly AI *Name* is a detection system for harmful speeches in online video games. Using AssemblyAI’s Audio Intelligence APIs, we can distinguish players who display verbally abusive behaviors in the video game community. Data extracted is plotted to have track of the possible abusive language along the video or streaming. Thus, large video game companies and streaming platforms can use this data-monitoring to identify the most toxic users to create a safer environment for their community. We are willing to take part in the new generation of voice-controlled games and streaming. 
