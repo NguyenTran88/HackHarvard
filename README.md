@@ -58,6 +58,9 @@ With AssemblyAI Audio Intelligence Content Monitoring and Sentiment Analysis API
 3. Python
    - matplotlib.pyplot to generate graphs and figures
    - Requests module to create HTTP requests to interact with API
+4. NodeJS/Express
+5. HTML/CSS/Bootstrap
+6. Heroku
    
 ## Mission 
 
