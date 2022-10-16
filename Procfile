@@ -1,1 +1,2 @@
-web: pip install requests && pip install argparse && npm start
+web: npm start
+worker: pip install requests && pip install argparse
