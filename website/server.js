@@ -21,13 +21,15 @@ function processAudio(req, res) {
     var spawn = require('child_process').spawn;
     var process = spawn('python', ['./main.py', 'website/audio.mp3', '--local']);
 
+    var output = '';
     process.stdout.on('data', function (data) {
         console.log(data.toString());
-        res.send(JSON.stringify({
-            text: data.toString()
-        }));
+        output += data.toString();
 
-        fs.unlinkSync(__dirname + '/audio.mp3');
+        if (output.includes('Done.')) {
+            res.send(JSON.stringify({ text: output }));
+            fs.unlinkSync(__dirname + '/audio.mp3');
+        }
     });
 }
 
