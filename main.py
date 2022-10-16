@@ -77,11 +77,8 @@ def process_sentiment_analysis_results(sentiment_analysis_results):
     return (total_time, negative_time, weighted_negative_time, times, sentiments)
 
 def main():
-    if os.environ.get('IS_HEROKU', None):
-        API_KEY = os.environ.get('API_KEY')
-    else:
-        f = open('.api-key', 'r')
-        API_KEY = f.readline().strip()
+    f = open('.api-key', 'r')
+    API_KEY = f.readline().strip()
 
     HEADER = {
         'authorization': API_KEY,
