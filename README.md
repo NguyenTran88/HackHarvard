@@ -56,7 +56,7 @@ With AssemblyAI Audio Intelligence Content Monitoring and Sentiment Analysis API
    - matplotlib.pyplot to generate graphs and figures
    - Requests module to create HTTP requests to interact with API
    
-## Impact / Value 
+## Mission 
 
 Thanks to this protection implementation, thousands of gaming users will safely coexist with each other in both a well-protected and monitored environment. Understanding the severity and confidence of the scores accurately will allow us to detect the intentions of the user so companies can identify them, take further action, and prevent mental health issues such as suicide. Our goal is to find only those hurtful comments without restricting the users to express themselves with others. Implementing this project correctly will make the detection more efficient and as a result, users won’t have to worry about reporting toxic players on their own anymore.
  
