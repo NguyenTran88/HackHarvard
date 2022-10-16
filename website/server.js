@@ -21,7 +21,7 @@ function processAudio(req, res) {
     console.log('Processing audio...');
     fs.writeFileSync(__dirname + '/audio.mp3', req.body.audio, 'base64');
     var spawn = require('child_process').spawn;
-    var process = spawn('python', ['./main.py', 'website/audio.mp3', '--local']);
+    var process = spawn('python3', ['./main.py', 'website/audio.mp3', '--local']);
 
     var output = '';
     process.stdout.on('data', function (data) {
