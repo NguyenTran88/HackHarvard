@@ -40,7 +40,7 @@ app.post('/api/upload-audio-id', processAudioId);
 function processAudioId(req, res) {
     console.log('Processing audio id...');
     var spawn = require('child_process').spawn;
-    var process = spawn('python', ['./main.py', '--id', req.body.id]);
+    var process = spawn('python3', ['./main.py', '--id', req.body.id]);
 
     var output = '';
     process.stdout.on('data', function (data) {
