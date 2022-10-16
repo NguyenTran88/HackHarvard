@@ -34,7 +34,7 @@ Canva presentation link: https://www.canva.com/design/DAFPIp9e9A0/zdNoQjsjf4Ri3D
 
 # Our Project
 
-Assembly AI *Name* is a detection system for harmful speeches in online video games. Using AssemblyAI’s Audio Intelligence APIs, we can distinguish players who display verbally abusive behaviors in the video game community. Data extracted is plotted to have track of the possible abusive language along the video or streaming. Thus, large video game companies and streaming platforms can use this data-monitoring to identify the most toxic users to create a safer environment for their community. We are willing to take part in the new generation of voice-controlled games and streaming. 
+Assembly AI's SlurSensor is a detection system for harmful speeches in online video games. Using AssemblyAI’s Audio Intelligence APIs, we can distinguish players who display verbally abusive behaviors in the video game community. Data extracted is plotted to have track of the possible abusive language along the video or streaming. Thus, large video game companies and streaming platforms can use this data-monitoring to identify the most toxic users to create a safer environment for their community. We are willing to take part in the new generation of voice-controlled games and streaming. 
 
 ## Problematics
 
@@ -44,7 +44,7 @@ How are companies dealing with this problem?
  
 Video game companies detect toxic players via in-game reporting which most of the time, is not quite precise. Additionally, games like Clash of Clans use a text detection system that only replaces the ‘inappropriate’ words with asterisks. However, these prevention methods have not been helpful at all, since cyberbullying statistics do nothing but to increase daily. 
 
-## What is *name*?
+## What is SlurSensor?
 
 With AssemblyAI Audio Intelligence Content Monitoring and Sentiment Analysis APIs, video game companies could monitor users and finally implement a secure system by training the AI based on every user’s audio files;  thus, detecting if any sensitive content is spoken in those files and pinpointing exactly when and what was spoken so that after a short period, Our final aim is to make train the system so that it can successfully identify when someone is just joking around and when it is being an intentional threat, insult, and so on. For each audio we generate a graph to better comprehend the harmful behavior of each user. Therefore, these video game platforms could finally create a safe and regulated environment for all players and try to eliminate negative and toxic users once and for all. 
 
@@ -68,6 +68,8 @@ We are aware that these APIs are available to the public and are ready to use in
 ## What we learned:
             
 During the last 36 hours, we learned to think outside the box, challenge ourselves, and acquire skills we never thought we could gain. Furthermore, meeting incredible people who took this experience to the next level has been a privilege; realizing that we can create something beneficial and unique in such a short time is truly remarkable.
+
+In addition, we learned how to use the AssemblyAI. We learned how to work with optional command line arguments in python. We also learned how to use version control with git/Github, such as using branches and pull requests to simultaneously work on different tasks at the same time. We learned how to incorporate python scripts into Express/NodeJS projects. Finally, we learned how to work with file uploads in Javascript. 
 
 ## Possible setbacks / Next steps: 
  
