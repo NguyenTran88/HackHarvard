@@ -33,6 +33,24 @@ function processAudio(req, res) {
     });
 }
 
+app.post('/api/upload-audio-id', processAudioId);
+
+function processAudioId(req, res) {
+    console.log('Processing audio id...');
+    var spawn = require('child_process').spawn;
+    var process = spawn('python', ['./main.py', '--id', req.body.id]);
+
+    var output = '';
+    process.stdout.on('data', function (data) {
+        console.log(data.toString());
+        output += data.toString();
+
+        if (output.includes('Done.')) {
+            res.send(JSON.stringify({ text: output }));
+        }
+    });
+}
+
 app.use((req, res) => {
     res.sendFile(req.url, { root: __dirname });
 });

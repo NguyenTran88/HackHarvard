@@ -57,3 +57,31 @@ document.getElementById('input').addEventListener('change', function (event) {
 
     reader.readAsDataURL(file);
 });
+
+document.getElementById('audio-id-select').addEventListener('change', function (event) {
+    document.getElementById('response-overall').innerHTML = `
+    <h4>Response:</h4>
+    <div id="response">Processing... (this may take a few minutes)</div>`;
+    fetch('/api/upload-audio-id', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: this.value
+        })
+    }).then(response => response.json())
+    .then(response => response.text)
+    .then(function (response) {
+        console.log(response);
+        document.getElementById('response').innerHTML = response
+            .replace(/\n/g, '<br>')
+            .replace(/\033\[91m/g, '<span class="text-danger">')
+            .replace(/\033\[92m/g, '<span class="text-success">')
+            .replace(/\033\[93m/g, '<span class="text-warning">')
+            .replace(/\033\[94m/g, '<span class="text-primary">')
+            .replace(/\033\[95m/g, '<span style="color: purple;">')
+            .replace(/\033\[96m/g, '<span class="text-info">')
+            .replace(/\033\[0m/g, '</span>');
+    });
+});
